@@ -106,4 +106,4 @@ adk web path/to/agents_dir --memory_service_uri="agentengine://<AGENT_ENGINE_ID>
 ## Cierre
 Este curso te deja una base sólida para construir agentes conversacionales, coordinadores e incluso pipelines en segundo plano, con controles de seguridad y observabilidad para producción. Conecta estos bloques con tus datos y procesos, itera con evaluaciones, y comparte lo que construyas. ¡Nos encantará ver tu próximo agente en acción!
 
-Descargo de responsabilidad: Este contenido se basa en el curso “Building Live Voice Agents with Google’s ADK!” de DeepLearning.AI (https://learn.deeplearning.ai/courses/building-live-voice-agents-with-googles-adk/lesson/dewdno61/introduction). Este blog busca acercar material de ADK al español.
+Descargo de responsabilidad: Este contenido se basa en el curso “Building Live Voice Agents with Google’s ADK!” de DeepLearning.AI (https://learn.deeplearning.ai/courses/building-live-voice-agents-with-googles-adk/). Este blog busca acercar material de ADK al español.
