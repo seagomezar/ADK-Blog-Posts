@@ -1,48 +1,51 @@
-## 🎓 Conclusión: Cierre del curso y próximos pasos
+# Curso: Building Live Voice Agents with Google’s ADK (en español)
 
-Has completado el recorrido desde un agente básico hasta un sistema multi‑agente listo para producción, con voz en tiempo real, herramientas, callbacks/guardrails, salidas estructuradas, evaluación, despliegue y observabilidad. Aquí resumimos los aprendizajes, te dejamos recursos verificados en la doc local (adk-docs) y una guía de siguientes pasos.
+Este repositorio acompaña una serie de blogs en español que cubren, paso a paso, cómo construir agentes con el Agent Development Kit (ADK) de Google: desde tu primer agente y herramientas personalizadas, hasta callbacks, salidas estructuradas y preparación para producción (streaming, memoria, evaluación, despliegue y observabilidad).
 
-## Panorama general
-- Diseñar agentes con propósito claro, instrucciones sólidas y herramientas adecuadas.
-- Orquestar flujos: conversacional, coordinador/dispatcher y pipelines en segundo plano.
-- Añadir control programático con callbacks y Plugins para guardrails de producción.
-- Estandarizar salidas con esquemas (y entender cuándo separar formateo y tooling).
-- Evaluar calidad (trayectoria + respuesta) y desplegar con trazabilidad.
+Cada lección incluye:
+- Un blog (contenido pedagógico y enlaces a la doc pública de ADK).
+- Un Notebook de apoyo (en GitHub).
+- Un directorio `lessonN/` con el agente listo para ejecutar en ADK.
+- Una rama git dedicada por lección.
 
-## Lo que aprendiste por lección
-- Lección 1 — Fundamentos y Web UI
-  - Crear un agente, agregar `google_search` y probarlo en `adk web`.
-  - Buenas prácticas de instrucciones y configuración declarativa con Agent Config YAML.
+## Mapa de lecciones y materiales
+- Lección 1 — Fundamentos: primer agente, Web UI y Google Search
   - Blog: Lesson_1_blog.md
-- Lección 2 — Herramientas personalizadas
-  - Definir Function Tools bien tipadas (docstrings, errores controlados) y combinarlas con `google_search`.
-  - Entender Session/State/Memory a nivel conceptual.
+  - Notebook: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_1.ipynb
+  - Código: `lesson1/`
+- Lección 2 — Herramientas personalizadas y flujo conversacional
   - Blog: Lesson_2_blog.md
-- Lección 3 — Coordinador en segundo plano
-  - Patrón Coordinator–Dispatcher: ejecutar en silencio, responder solo dos veces y persistir Markdown.
+  - Notebook: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_2.ipynb
+  - Código: `lesson2/`
+- Lección 3 — Coordinador en segundo plano (reportes Markdown)
   - Blog: Lesson_3_blog.md
+  - Notebook: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_3.ipynb
+  - Código: `lesson3/`
 - Lección 4 — Callbacks y guardrails
-  - `before_tool_callback` y `after_tool_callback` en `LlmAgent`, process log y políticas; nota sobre Plugins.
   - Blog: Lesson_4_blog.md
-- Lección 5 — Salidas estructuradas
-  - `output_schema` para JSON estricto (sin tools) y patrón de 2 agentes (tools → formateo). Uso de `output_key`.
+  - Notebook: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_4.ipynb
+  - Código: `lesson4/`
+- Lección 5 — Respuestas estructuradas y validación
   - Blog: Lesson_5_blog.md
-- Lección 6 — A producción
-  - Streaming en vivo (`run_live` + `LiveRequestQueue`), Vertex AI Memory Bank, `adk eval`, despliegue (Agent Engine/Cloud Run/GKE), seguridad y observabilidad.
+  - Notebook: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_5.ipynb
+  - Código: `lesson5/`
+- Lección 6 — A producción (streaming, memoria, evaluación, despliegue, observabilidad)
   - Blog: Lesson_6_blog.md
+  - Notebook: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_6.ipynb
+  - Código: `lesson6/` (incluye ejemplo en `lesson6/streaming/main.py`)
+- Conclusión y próximos pasos: Conclusion_blog.md
 
-## Recursos esenciales (adk-docs locales)
-- Quickstart y Python: adk-docs/docs/get-started/quickstart.md, adk-docs/docs/get-started/python.md
-- Streaming (voz/video): adk-docs/docs/get-started/streaming/quickstart-streaming.md
-- Built‑in tools y Google Search: adk-docs/docs/tools/built-in-tools.md, adk-docs/docs/grounding/google_search_grounding.md
-- Function Tools: adk-docs/docs/tools/function-tools.md
-- Callbacks y Plugins: adk-docs/docs/callbacks/types-of-callbacks.md, adk-docs/docs/plugins/index.md
-- Contextos (ToolContext/CallbackContext): adk-docs/docs/context/index.md
-- Memoria: adk-docs/docs/sessions/memory.md
-- Evaluación: adk-docs/docs/evaluate/index.md
-- Despliegue: adk-docs/docs/deploy/agent-engine.md, adk-docs/docs/deploy/cloud-run.md, adk-docs/docs/deploy/gke.md
-- Observabilidad: adk-docs/docs/observability/logging.md, adk-docs/docs/observability/cloud-trace.md
-- Seguridad: adk-docs/docs/safety/index.md
+## Enlaces útiles (doc pública)
+- Quickstart: https://google.github.io/adk-docs/get-started/quickstart/
+- Python: https://google.github.io/adk-docs/get-started/python/
+- Built‑in Tools: https://google.github.io/adk-docs/tools/built-in-tools/
+- Function Tools: https://google.github.io/adk-docs/tools/function-tools/
+- Callbacks: https://google.github.io/adk-docs/callbacks/types-of-callbacks/
+- Plugins: https://google.github.io/adk-docs/plugins/
+- Memoria: https://google.github.io/adk-docs/sessions/memory/
+- Evaluación: https://google.github.io/adk-docs/evaluate/
+- Despliegue: https://google.github.io/adk-docs/deploy/
+- Observabilidad: https://google.github.io/adk-docs/observability/
 
 ## Instalación y comandos básicos (alineados a docs)
 ```bash
@@ -103,4 +106,3 @@ adk web path/to/agents_dir --memory_service_uri="agentengine://<AGENT_ENGINE_ID>
 
 ## Cierre
 Este curso te deja una base sólida para construir agentes conversacionales, coordinadores e incluso pipelines en segundo plano, con controles de seguridad y observabilidad para producción. Conecta estos bloques con tus datos y procesos, itera con evaluaciones, y comparte lo que construyas. ¡Nos encantará ver tu próximo agente en acción!
-
