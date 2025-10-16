@@ -2,6 +2,8 @@
 
 Resumen: Crea tu primer agente ADK con búsqueda web, configura el entorno (.env), prueba en la Web UI y sienta bases para futuras extensiones.
 
+Notebook de la lección: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_1.ipynb
+
 Bienvenida/o a la aventura de crear tu primer agente de noticias de IA con el Agent Developer Kit (ADK) de Google. En esta lección sentamos las bases de un agente capaz de conversar, conectarse al mundo real y entregar información fresca. Aquí tienes un recorrido claro del cuaderno `Lesson_1.ipynb`, con consejos prácticos para avanzar con confianza. 🙌
 
 ## Panorama general

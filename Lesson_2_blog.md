@@ -2,6 +2,8 @@
 
 Resumen: Añade un Function Tool (`get_financial_context`), combínalo con `google_search`, guía la conversación con instrucciones y prueba el flujo en la Web UI.
 
+Notebook de la lección: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_2.ipynb
+
 En esta segunda entrega extendemos el agente con una herramienta propia y reforzamos el flujo conversacional para que las respuestas sean útiles y consistentes. Además, conectamos las ideas del video sobre Sesión, Estado y Memoria, que dan soporte a conversaciones persistentes. 🙌
 
 ## Panorama general

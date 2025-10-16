@@ -2,6 +2,8 @@
 
 Resumen: Adopta el patrón Coordinator–Dispatcher para investigar en silencio, enriquecer con finanzas y persistir un reporte Markdown sin ruido en el chat.
 
+Notebook de la lección: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_3.ipynb
+
 En esta tercera lección transformamos al asistente conversacional en un coordinador silencioso que investiga, compone un reporte y solo te habla dos veces. Reutilizamos herramientas de la lección anterior y agregamos persistencia de archivo para obtener un artefacto claro: un reporte Markdown. 🚀
 
 ## Panorama general

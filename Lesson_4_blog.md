@@ -2,6 +2,8 @@
 
 Resumen: Implementa filtros y trazabilidad con callbacks (`before_tool` y `after_tool`) en `LlmAgent`, y conoce cuándo usar Plugins para políticas globales.
 
+Notebook de la lección: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_4.ipynb
+
 Los agentes son potentes… y no deterministas. En esta lección añadimos control programático para que tu agente se comporte de forma predecible: afinamos instrucciones y usamos callbacks como guardrails que filtran dominios, enriquecen respuestas y dejan trazabilidad. Al final tendrás un agente listo para producción que combina todo lo previo con controles efectivos. 💪
 
 ## Panorama general

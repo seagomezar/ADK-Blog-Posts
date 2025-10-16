@@ -2,6 +2,8 @@
 
 Resumen: Lleva tu agente a producción con streaming en vivo, memoria persistente, evaluación de calidad, despliegue gestionado, guardrails y observabilidad basada en OpenTelemetry.
 
+Notebook de la lección: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_6.ipynb
+
 En esta lección cerramos el círculo: llevamos tu sistema (multi‑)agente del entorno local a producción. Nos apoyamos en el transcript y contrastamos cada pilar con la documentación local de ADK para darte un camino concreto y seguro.
 
 ## Panorama general

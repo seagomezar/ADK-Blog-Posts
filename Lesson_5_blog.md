@@ -2,6 +2,8 @@
 
 Resumen: Establece contratos de salida con Pydantic y/o `output_schema`; valida JSON, genera Markdown y coordina con callbacks para trazabilidad.
 
+Notebook de la lección: https://github.com/seagomezar/ADK-Blog-Posts/blob/main/Lesson_5.ipynb
+
 En esta quinta lección llevamos tu agente a un nivel “enterprise”: estandarizamos la salida con esquemas, validamos datos y mantenemos la trazabilidad que iniciamos con los callbacks de la Lección 4. El objetivo es lograr respuestas predecibles, fáciles de consumir por otras apps y listas para producción. 🔒✨
 
 ## Panorama general
