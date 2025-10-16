@@ -1,0 +1,485 @@
+0:03
+In the previous lesson, we saw how to create an agent,
+0:06
+add a built-in tool and have live conversations.
+0:09
+But we didn't do any of the heavy lifting.
+0:12
+ADK Web hides away most of
+0:14
+the complexities like session and memory management.
+0:18
+In this lesson, let's take a quick detour from the hands-on building
+0:22
+and understand what these services are. Let's get started.
+0:25
+In the previous lesson, we created
+0:27
+a basic agent with a built-in tool.
+0:29
+The ADK Web interface handles much of the underlying complexity for us.
+0:33
+However, as you build more sophisticated agents,
+0:35
+you will need finer control of
+0:37
+core services like Session, State, and Memory.
+0:40
+And that is exactly what we're going to
+0:41
+be discussing in this lesson. Let's dive straight in.
+0:44
+Think of Session as the container for a single conversation thread.
+0:48
+It begins when a user starts interacting with your agent
+0:51
+and in many cases ends when that interaction stops.
+0:55
+For instance, if you're running an agent in a notebook,
+0:58
+the session terminates when you stop the runtime.
+1:01
+The session object acts as a comprehensive data log.
+1:04
+for the conversation, capturing state, events, and metadata.
+1:09
+ADK manages sessions through a SessionService,
+1:12
+and the default is an InMemorySessionService,
+1:15
+which is temporary and does not persist after the conversation ends.
+1:18
+However, you can also configure a persistent session service
+1:21
+to store and retrieve session data for later use.
+1:24
+And what you see here is a very simple example
+1:27
+of what the session might contain.
+1:29
+It has a state, it has the events and an app name.
+1:32
+which is basically a data dump of all the conversations,
+1:35
+of all the logs that goes
+1:37
+into your agent. Next is the state.
+1:39
+So state is a session's short-term scratchpad.
+1:42
+It is basically a dictionary of key value pairs
+1:45
+that holds the current context of the conversation.
+1:48
+You can write any information to
+1:49
+the state and it will be accessible
+1:51
+to all the tools and agents within that session.
+1:54
+This makes it a powerful mechanism for communication.
+1:57
+For example, if you're using multiple tools or multiple agents
+2:00
+that are involved in the same task, they can also share information
+2:04
+by reading and writing to the session state.
+2:06
+And the third one is your memory service.
+2:09
+Memory is very different from Session in that
+2:11
+Session is actually your data dump
+2:13
+of everything that happens in an agent,
+2:15
+but Memory is more long-term.
+2:17
+It provides your agent with the long-term persistence.
+2:21
+So remember how we saw the JSON for a session?
+2:24
+It basically holds a ton of information,
+2:26
+but not everything is actually useful for the agent to remember long-term.
+2:30
+So memory is a compacted version of that.
+2:33
+information the agent needs to remember for long term.
+2:36
+For example, if you tell your agent that
+2:38
+your favorite coffee order is an oat milk latte,
+2:41
+you would likely want it to remember for
+2:43
+a long time and not forget it again tomorrow.
+2:46
+And that is exactly what memory provides you with.
+2:48
+In most cases, in memory services,
+2:50
+most of the memory services uses an LLM
+2:53
+to actually go through the session data
+2:55
+and extract key valuable pieces of information
+2:58
+that needs to be remembered long term
+3:01
+and then saves it. And ADK offers different
+3:03
+memory service implementations including an in-memory service
+3:07
+and an integration with the Vertex AI memory bank.
+3:09
+We'll explore the memory bank in a later session in this course.
+3:13
+And with that, we've covered the theoretical foundations
+3:16
+of session, state, and memory in ADK.
+
+0:04
+In this lesson, you learn how to add custom Python tools
+0:07
+to your agents. You'll integrate an external API to fetch financial information.
+0:11
+We'll then look at best practices for defining tools
+0:14
+and how to modify the agent instructions to effectively use these tools.
+0:18
+All right, let's get to it. Make
+0:20
+sure that the latest version of ADK
+0:22
+and other dependencies are installed on your environment and since we'll be
+0:25
+already done that, we can move forward.
+0:28
+The first step is to always create our ADK folder
+0:30
+as we have been doing with all the lessons.
+0:32
+You don't need to add your key in the current lab,
+0:34
+but if you choose to run
+0:36
+this in your own environment or computer,
+0:37
+make sure to pass Gemini API key in the ADK create command.
+0:40
+You can get that from Google AI Studio or Vertex AI Studio.
+0:44
+Now, as we discussed, our goal for the lesson
+0:47
+is to enhance the news search with one more tool.
+0:49
+additional source of information.
+0:51
+We currently get the latest news
+0:52
+in AI from all over the companies
+0:54
+and it would be great if we
+0:56
+can somehow also understand their financial market performance.
+0:59
+For example, if the latest news from Google is
+1:01
+about, let's say the new launch of Veo3 feature,
+1:03
+then by observing the stock prices and percentage changes
+1:07
+can give us an indirect signal
+1:09
+if that news is positive or negative,
+1:11
+generally speaking. Again, disclaimer here is
+1:13
+that it's not a stock buying recommendation.
+1:16
+An increase or decrease in the
+1:17
+price is not direct correlation with news.
+1:19
+But we are trying to see if we can get more information
+1:22
+from a live data by adding a simple Python function.
+1:25
+To achieve this, we have a get_financial_context function.
+1:28
+Now, as we said, this is
+1:30
+a function tool for our ADK agent.
+1:31
+The ADK framework is incredibly smart about these.
+1:35
+It actually reads the function's description, parameters,
+1:38
+and even the type hints to understand what the tool does.
+1:41
+That's why having a clear doc
+1:43
+string, like the one we have here,
+1:45
+is so important for the agents to know when
+1:48
+and how to use this tool effectively.
+1:50
+Let's look at the code as well.
+1:52
+The function is named get_financial_context and
+1:54
+it accepts one argument, which is tickers,
+1:56
+which you have specified must be a list of string.
+1:59
+This is where the stock tickers like
+2:01
+GOOG or NVDA will be passed in.
+2:04
+Inside the function, we first create an empty dictionary called financial_data.
+2:08
+This is where we'll store the results for
+2:10
+each ticker before returning them all in the end.
+2:12
+Next, we loop through each ticker_symbol in the tickers
+2:16
+list that the agent provides.
+2:18
+The core of the magic happens inside the loop.
+2:20
+We use a popular Python library
+2:21
+called yfinance to do the heavy lifting.
+2:23
+The line stock equals to yfinance.Ticker
+2:26
+creates an object that represents the specific stock we are interested in.
+2:30
+Then info equals to stock.info
+2:32
+fetches the whole dictionary of information about that stock.
+2:35
+We're interested in two specific piece of data, the current price
+2:38
+and the percentage change for the day.
+2:40
+We use the dot get method to safely access these values.
+2:43
+This is a good practice because if
+2:45
+the data isn't available for some reason,
+2:47
+our code won't crash.
+2:48
+Assuming we successfully get both the price and the percentage change,
+2:52
+we then format them into a clean, readable string.
+2:55
+for example, dollar 175.20 plus 1.25%.
+2:59
+And this is just an example, and
+3:01
+we add this string to our financial_data dictionary
+3:04
+with the ticker_symbol as the key.
+3:06
+And because things can sometimes go wrong,
+3:08
+maybe a ticker is invalid or there's a network issue.
+3:11
+We've wrapped this whole logic in a try except block.
+3:13
+This is our safety net. If any error occurs,
+3:17
+we simply record the error message for the
+3:18
+ticker and move on to the next one.
+3:19
+Finally, after the loop finishes, the function returns the financial_data.
+3:23
+a dictionary which now contains the financial
+3:25
+context for every ticker the agent asked for.
+3:28
+Now let's run this code and see the output.
+3:31
+What you see here is that we have updated
+3:33
+our agent.py with the tool that we have just written.
+3:36
+Now, let's move on to the root agent itself.
+3:39
+This is the brain of our operation.
+3:41
+The agent is defined with a name and a model, and most
+3:44
+importantly, a detailed set of instructions and list of tools it can use.
+3:47
+We're using the gemini-2.0-flash-live-001 model.
+3:51
+The live part is a key here.
+3:53
+It indicates that we're using a model designed for real-time, bidirectional streaming.
+3:58
+This is what enables the natural, voice-driven conversation
+4:01
+where you can even interrupt the agent and it can respond instantly.
+4:05
+The real power, however, lies in the instruction of the prompt.
+4:08
+This is where we shape the agent's personality and workflow.
+4:12
+We've given it a very specific set of rules.
+4:15
+For instance, if you just say something like, give me AI news,
+4:18
+the agent is instructed to respond with, Sure, I can do that.
+4:22
+How many news items would you like me to find?
+4:24
+It won't proceed until it has that number.
+4:27
+Once you provide a number, the agent follows its workflow.
+4:30
+Step one is to use its google_search tool to find the news.
+4:33
+Step two is to analyze that news to identify company tickers,
+4:37
+and step three is to use our new get_financial_context tool
+4:40
+to fetch the stock data for those tickers.
+4:43
+Notice how we explicitly tell the agent
+4:45
+to cite its tool in the response,
+4:47
+starting with using google_search for news
+4:49
+and get_financial_context via yfinance for market data.
+4:53
+The transparency is a key part of our agent's design.
+4:56
+This entire interaction is made possible
+4:58
+by the ADK's session and state management.
+5:01
+When you start a conversation,
+5:03
+the ADK creates a session that acts like the agent's short-term memory.
+5:07
+Each message back and forth is a turn in the conversation.
+5:10
+The agent can store information in the session state.
+5:13
+For example, when you tell it you want three news items,
+5:16
+it remembers that number for the next step.
+5:18
+This is how it maintains context
+5:21
+because this state is preserved throughout the session.
+5:24
+You can ask follow-up questions.
+5:25
+For instance, after it tells you the headlines,
+5:28
+you can say, tell me more about the second one,
+5:31
+and the agent can refer back to the information
+5:33
+it previously gathered to give you a detailed summary.
+5:36
+So when you speak to the
+5:38
+agent, the live model transcribes your audio
+5:40
+and the agent logic processes your request.
+5:43
+It uses its tool in the sequence we define
+5:46
+and it streams back the audio response,
+5:49
+all while keeping track of the conversation history in its session state.
+5:53
+This creates a seamless and intelligent conversational experience.
+5:57
+Now let's run this and add this to our agent.py.
+6:00
+Excellent. Now that we have coded both our
+6:02
+custom tools and root agent that uses it,
+6:04
+the next step is to bring our AI news analyst to life.
+6:08
+Now, let's run our ADK web UI and test our agent.
+6:11
+Hi, can you help me with the latest in the AI news?
+6:14
+Sure, I can do that. How many
+6:16
+news items would you like me to find?
+6:18
+Find three for me. using Google_search for news
+6:21
+and get_financial_context
+6:24
+via yfinance for market data. Here are the top headlines.
+6:27
+One, Top publicly traded AI companies
+6:30
+to know, NVDA
+6:33
+$177.33
+6:35
+plus 384.75%.
+6:39
+Two, Core Weave stock rises
+6:41
+on news of NVDA backed firms
+6:43
+VC fund for AI investments.
+6:45
+No ticker available. Three.
+6:47
+AI boom sends Oracle stock to record high
+6:51
+near $1 trillion mark.
+6:53
+ORCL $328.33
+6:57
+plus 3594.88%.
+7:00
+Which of these are you interested
+7:01
+in? Or should I search for more?
+7:03
+Tell me more about the first one.
+7:05
+Okay, here's more on the first headline.
+7:08
+The article discusses top publicly traded AI companies.
+7:11
+NVDA is highlighted as a key player in the AI space.
+7:15
+According to the get_financial_context tool,
+7:18
+NVDA is currently trading at $177.33.
+7:23
+which is plus 384.75%.
+7:26
+What else would you like to know?
+7:28
+What's the best recipe for chocolate cake?
+7:30
+I can only provide recent AI news
+7:32
+for US listed companies.
+7:34
+Excellent. As you saw, we were able
+7:36
+to get the financial data for the companies
+7:38
+while searching for the news and it followed all the instructions.

@@ -1,0 +1,626 @@
+0:02
+This lesson takes your multi-agent system
+0:06
+from development to production. You'll learn how to evaluate your agents
+0:09
+to ensure reliable behavior,
+0:11
+give your agents persistent memory
+0:13
+using Vertex AI memory bank,
+0:14
+and deploy to a scalable cloud environment
+0:17
+using Vertex AI's agent engine.
+0:19
+We'll also briefly discuss the live
+0:21
+bidirectional agent architecture.
+0:23
+Let's make the magic happen. Welcome to this lesson.
+0:26
+In our journey throughout this course,
+0:28
+we have built a sophisticated multi-agent podcast
+0:31
+system which can take in voice input
+0:33
+from the user and return a podcast episode.
+0:35
+And in our final lesson, we are going to cover
+0:38
+the important topic of productionizing the agent we just built.
+0:41
+There's a crucial gap between our local
+0:44
+development setup and a production ready system.
+0:45
+And production AI agents face unique challenges that development environments don't expose.
+0:51
+And in this lesson, we'll explore
+0:53
+six fundamental pillars of production AI systems.
+0:55
+We'll walk through these by first looking
+0:58
+into the live BiDirectional architecture in ADK.
+1:00
+something that you would use in a production environment
+1:02
+as you build more complex agents
+1:04
+and move out of the ADK web.
+1:06
+And then we'll give our agent Persistent
+1:07
+Memory that it needs for a production system.
+1:09
+Now, once both these are done, our agent is
+1:11
+now in a place where we can evaluate its performance.
+1:14
+And then comes the standard practice of deploying our apps to scale,
+1:18
+adopting agent security practices,
+1:20
+and making sure that we have agent observability
+1:23
+so that our agents are not a black box.
+1:25
+And as we walk through these
+1:27
+practices, we'll also see the different capabilities
+1:29
+ADK and Google Cloud provides to address them.
+1:31
+Let's start with the Live BiDirectional Streaming.
+1:33
+Using real-time conversational interfaces is a huge unlock.
+1:37
+As humans, we've evolved for thousands
+1:38
+of years to talk to each other,
+1:40
+and now we can translate that and choose
+1:42
+to speak with our agents instead of typing.
+1:44
+And for it to actually feel natural,
+1:46
+you will need extremely capable models and
+1:48
+low latency streaming connections to their APIs.
+1:51
+And this requires bidirectional streaming, audio processing,
+1:54
+and something that actually feels instantaneous to feel it human-like.
+1:58
+For natural conversations, it requires more than fast response.
+2:02
+You need emotional understanding, pauses, and the ability to interrupt
+2:05
+and be interrupted naturally.
+2:07
+The Gemini live bidirectional API
+2:10
+enables true conversational AI through Websocket connections
+2:13
+that maintain persistent real-time communication.
+2:16
+The system handles complex Audio Processing pipelines,
+2:18
+Multilingual Voice Synthesis with multiple speaker options,
+2:22
+and Emotion-Aware responses that adapt to the user and tone.
+2:26
+And when you put all of this together,
+2:28
+What you get is a conversational
+2:30
+experience that feels more natural and human-like.
+2:32
+And ADK provides a very simple interface
+2:35
+to plug in this Gemini live API.
+2:37
+In this course, we ran all of
+2:39
+our agents with ADK web, which simplified
+2:41
+and hid most of the complexities
+2:43
+involved in creating a live bidirectional agent.
+2:45
+We were still interacting with the Gemini live model
+2:47
+and got our voice responses as output in real time using WebSockets,
+2:52
+but as you scale your agent further,
+2:54
+you might want to integrate it with your existing systems
+2:57
+and client and at that point you might want to have final control
+3:01
+over how you implement the live BiDirectional streaming.
+3:04
+And let's have a very quick look
+3:06
+at how you might do this with ADK.
+3:07
+ADK abstracts the core agent logic
+3:10
+from the transport layer through two fundamental primitives:
+3:14
+a live_request_queue to send data to the agent
+3:17
+and a live_events stream to receive responses from the agent.
+3:20
+This design means your agent logic is completely independent of
+3:24
+whether you use WebSocket or Server-Sent Events or other
+3:27
+protocols. The live_request_queue
+3:29
+handles different message types like text, real-time audio blobs,
+3:32
+and activity signals for natural conversational flow.
+3:35
+Meanwhile, the live_events stream
+3:37
+yields real-time events including agent responses,
+3:40
+turn completion signals, interrupts, and streaming tool outputs.
+3:44
+And then you orchestrate both of this using
+3:47
+a runner.run live method that ADK provides.
+3:49
+There are links for you in the
+3:51
+resource section to learn more about this
+3:52
+live bidirectional streaming architecture and how to implement it. And next up,
+3:56
+is to provide your agents with Persistent Memory
+4:00
+and we actually briefly discussed this in lesson two.
+4:02
+Agents seem much more intelligent if
+4:04
+they can actually remember conversations across sessions,
+4:07
+learn user preferences and maintain context even when systems restart.
+4:11
+And agentic memory is actually of two types.
+4:14
+Volatile which disappears on session starts
+4:16
+and Persistent Memory which is the long-term memory backed up somewhere.
+4:20
+And that is exactly the kind
+4:21
+of memory that we're talking about here.
+4:22
+For production, agents need to build understanding over time.
+4:26
+recognize patterns in user behavior
+4:28
+and provide increasingly personalized experiences.
+4:31
+And ADK gives you an interface for everything, memory included,
+4:34
+and you can add a provider for
+4:36
+any memory service like Vertex AI's Memory Bank,
+4:38
+mem0.ai, or any other DBs with your agent.
+4:42
+Memory Bank is Google Cloud's managed service
+4:44
+that transforms raw conversation history into intelligent, searchable knowledge.
+4:48
+Unlike simple session storage,
+4:51
+Memory Bank actually uses an LLM-powered processing to extract meaningful information.
+4:55
+from your session data and then consolidate it with existing knowledge
+4:59
+and provide semantic search capabilities.
+5:01
+So the next time you ask your agent a question
+5:04
+from one of your previous sessions, it might
+5:06
+actually be able to use this long-term memory
+5:08
+and fetch the context and give you the exact answer.
+5:11
+And this actually enables agents not
+5:13
+only to remember what you just said,
+5:15
+but what you meant, what you
+5:17
+prefer, and how you like to work.
+5:19
+The service also handles complex challenges of memory consolidation,
+5:22
+determining what's worth remembering and
+5:25
+how it connects to existing knowledge.
+5:27
+And with this, your agents evolve
+5:28
+from fixed systems to intelligent, personalized assistants
+5:31
+that grow smarter with every interaction.
+5:33
+And after implementing both the bidirectional live streaming and the persistent memory,
+5:37
+we're actually in a good spot
+5:39
+to perform agent evaluation at this point.
+5:41
+And fun fact, when I started learning about AI agents,
+5:44
+I used to think agent eval was something like unit testing
+5:47
+the agent's behavior, but turns out I'm completely wrong.
+5:50
+Well, if you're writing traditional unit tests
+5:52
+for your agent, you're trying to measure
+5:54
+dynamic system with a static ruler.
+5:56
+The very probabilistic nature of LLMs needs our change in approach,
+6:00
+and that is exactly where we
+6:02
+go from Verifying correctness to Assessing Quality.
+6:04
+And both these mean very different things.
+6:06
+Verifying correctness can be done through unit tests,
+6:08
+but which do not translate to the
+6:11
+world of AI agents because they're non-deterministic.
+6:13
+But instead, we need to assess how helpful, harmless,
+6:16
+and reliable your agent is.
+6:18
+And that is the core of evaluating an agent.
+6:21
+Broadly speaking, there are two categories of
+6:23
+quality checks that we can perform on an agent.
+6:26
+We can look into the agent's trajectory,
+6:28
+verify if it took the right steps,
+6:29
+if it called the right tools, use
+6:31
+the right sub agent to get something done.
+6:33
+And we can also look into the final response
+6:35
+from the agent to check if the answer was
+6:37
+any good and if it matched our expectations.
+6:39
+ADK provides again with a comprehensive evaluation framework and built-in metrics like
+6:44
+tool trajectory scoring, response matching, and safety evaluation.
+6:48
+You can evaluate agents through the web
+6:50
+UI if you want to debug your agents,
+6:52
+or even programmatically via pytest for CICD integration
+6:56
+or also through the CLI with its adk eval command.
+6:59
+The framework supports both test files for unit testing
+7:02
+and comprehensive evaluation sets for integration testing.
+7:05
+There's also another option, Vertex AI evaluation service,
+7:08
+which integrates seamlessly with ADK, providing cloud-based evaluation capabilities
+7:12
+including advanced NLP metrics for Coherence and Safety assessment.
+7:16
+This service uses pre-built metrics like Coherence
+7:19
+for response quality scoring and Safety for
+7:22
+harmlessness evaluation. Processing your agent data in the cloud
+7:25
+and returning results with a configurable pass or fail thresholds.
+7:29
+And this makes our decision much simpler
+7:31
+when we have a pass or a fail.
+7:33
+With this integration, you can combine local ADK metrics for trajectory analysis
+7:38
+with cloud-based Vertex AI metrics for sophisticated language understanding assessment.
+7:43
+And finally, once we're done with agent eval,
+7:46
+it's now time to deploy our agents to production.
+7:49
+A single agent running locally can't handle
+7:50
+thousands of concurrent users.
+7:53
+Production applications of all types need automatic scaling, load distribution,
+7:57
+and infrastructure management without manual intervention.
+8:01
+Actually scaling applications or AI agents
+8:04
+isn't actually about handling more requests,
+8:07
+but it's much more. It is about maintaining performance,
+8:09
+managing your costs and ensuring reliability as the demand fluctuates.
+8:13
+Google Cloud's Vertex AI Agent Engine
+8:16
+provides turnkey serverless deployment
+8:18
+specifically for agentic AI workloads.
+8:21
+Unlike generic compute platforms, it understands agent life cycles,
+8:25
+manages model loading efficiently, and provides built-in integrations
+8:28
+with AI services. Actually,
+8:31
+Agent Engine isn't just only a Runtime.
+8:33
+It has providers for Sessions and Example Store service,
+8:37
+which is basically a RAG for multi-shot examples.
+8:39
+It also has memory bank and more.
+8:42
+The platform auto-scales based on AI specific needs and resources,
+8:45
+which are configurable by you,
+8:47
+ensuring low latency and high availability for your users.
+8:50
+ADK is tightly integrated with agent engine
+8:53
+and you can deploy an agent to agent
+8:55
+engine with just one CLI command, ADK deploy.
+8:57
+And at the end of the day,
+8:59
+agents are just another type of application.
+9:01
+You can containerize agents and run them anywhere
+9:03
+that you actually run your other applications.
+9:05
+If you prefer to build all of the agentic services yourself,
+9:09
+you can use Cloud Run, which is our serverless runtime
+9:11
+built for scale, reliability, and flexibility.
+9:13
+Or if you want full control or the
+9:15
+power of Kubernetes, GKE is also a good option.
+9:17
+AI agents present very unique
+9:20
+challenges when it comes to security.
+9:21
+They process natural language, make autonomous decisions,
+9:24
+and may actually have access to sensitive information and powerful tools.
+9:28
+And this makes robust security mandatory.
+9:31
+Like robust authentication, content filtering,
+9:34
+input validation,
+9:35
+and protection against prompt injection and misuse.
+9:37
+Well, let's walk through each of those.
+9:39
+Security is actually a defense-in-depth game.
+9:41
+And agentic security requires multi-layered protection.
+9:44
+There are two ways in which your agents can authenticate.
+9:47
+Either using the Agent's credentials or
+9:49
+using the user's credentials.
+9:50
+The first approach actually works when every user
+9:53
+who's using the agent has the same privileges.
+9:55
+But if that's not the case,
+9:57
+then the agent actually needs to borrow
+9:59
+the user's credentials to get the job done.
+10:01
+And in this scenario, you also need to implement authentication
+10:04
+that goes beyond simple API keys to include OAuth flows,
+10:08
+service account credentials and fine-grained identity control
+10:12
+based on whether agents act with their own permissions
+10:14
+or the user permissions or a combination of both.
+10:17
+Authorization to resources is also another common concern.
+10:19
+Limiting the scope of agents, tools, APIs, and resources
+10:22
+that any principal can access to.
+10:24
+And this is especially important as you scale up
+10:27
+and need to govern a huge fleet.
+10:28
+Well, this brings us to another important topic
+10:31
+of how important it is to perform user input sanitization,
+10:34
+as it helps your agent be more secure against prompt injection,
+10:38
+content manipulation, and any attempts to make
+10:41
+agents perform unauthorized actions.
+10:43
+Content filtering actually combines built-in safety measures
+10:46
+from the LLM model itself with configurable
+10:48
+harm category thresholds and policy-based eval.
+10:50
+ADK lets you define before callbacks to sanitize your inputs.
+10:54
+And you can do it by implementing custom checks or using LLMs
+10:58
+to decide if a user's prompt is actually safe to pass.
+11:00
+Or you can also use special services like Model Armor,
+11:03
+which is a Google Cloud service designed to
+11:05
+enhance security and safety of your AI applications.
+11:07
+It works by proactively screening LLM prompts and responses,
+11:10
+protecting against various risks
+11:13
+and ensuring responsible AI practices.
+11:15
+And the same after callbacks can
+11:17
+safeguard against generated output from the agents
+11:20
+that you do not want to expose.
+11:22
+Maybe let's say the agent generates some information about a competitor
+11:25
+that you don't want it to expose.
+11:27
+And since you are in control of this callback,
+11:29
+you can actually handle these exceptions
+11:31
+and then maybe simply call the
+11:33
+model again to get a new output.
+11:34
+And this is exactly what people mean when they talk about guardrails.
+11:37
+And ADK gives you the flexibility and
+11:39
+control and the tools to do it.
+11:41
+There are also plenty of other safety measures that you can take
+11:44
+like sandbox code execution environments, setting up a
+11:47
+Virtual Private Cloud and adopting comprehensive safety evaluation frameworks
+11:51
+to ensure your agents operate within defined boundaries
+11:54
+while also maintaining functionality.
+11:56
+And this brings us to the final topic of observability.
+11:59
+Agents are general purpose systems which are capable of many things.
+12:02
+You need complete visibility into what your agents are actually doing,
+12:06
+how they are performing, and whether they are actually operating safely.
+12:09
+And this brings us to the final topic of agent observability.
+12:13
+Agents are actually general purpose systems which are capable of doing
+12:16
+many things. But you need complete visibility
+12:18
+into what your agents are actually doing,
+12:20
+how they're performing and whether they're operating safely.
+12:23
+When agent evaluation indicates you have a
+12:26
+problem with the quality of your agent,
+12:28
+observability is actually how you will debug them.
+12:30
+So having visibility is super crucial.
+12:33
+ADK provides comprehensive observability built on top of open telemetry standards.
+12:37
+This includes end-to-end tracing from user input, each internal
+12:40
+step, and all the way to the final response.
+12:43
+It also includes real-time monitoring of agent
+12:46
+interactions and detailed performance analytics,
+12:48
+including token usage, latency metrics, and cost tracking.
+12:51
+The framework integrates with leading observability platforms
+12:55
+like Weave for real-time visualization,
+12:57
+Arize for enterprise monitoring,
+12:58
+Phoenix for self-hosted observability,
+13:00
+and AgentOps for specialized agent analytics.
+13:02
+Each provides different capabilities from session replays
+13:06
+to custom evaluators to automated alerts.
+13:08
+You can also use Google Cloud Trace,
+13:10
+which aggregates the same traces and provides
+13:12
+waterfall views of complex agent interactions
+13:15
+across any distributed system.
+13:16
+Cloud Trace handles large multi-modal payloads and is actually helping
+13:21
+to shape the OpenTelemetry standards for LLMs and agents.
+13:23
+This comprehensive observability ensures you can monitor, debug,
+13:26
+and optimize your agents in production environments.
+13:29
+Congratulations. You've completed the journey
+13:32
+from understanding basic agents
+13:34
+to architecting production-ready AI systems.
+13:36
+And you're ready to build the future of conversational AI.
+13:38
+Check out the various exercises across all of the different lessons
+13:42
+and the resources section for further reading.

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="360" viewBox="0 0 980 360">
+  <style>
+    .box{fill:#fff;stroke:#444;stroke-width:2;rx:8;ry:8}
+    .title{font-family:Arial,sans-serif;font-size:16px;font-weight:bold;fill:#222}
+    .text{font-family:Arial,sans-serif;font-size:12.5px;fill:#333}
+    .arrow{stroke:#666;stroke-width:2;marker-end:url(#arrow)}
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#666" />
+    </marker>
+  </defs>
+  <!-- Streaming -->
+  <rect x="20" y="40" width="210" height="90" class="box"/>
+  <text x="125" y="65" text-anchor="middle" class="title">Streaming en Vivo</text>
+  <text x="125" y="87" text-anchor="middle" class="text">live_request_queue / live_events</text>
+  <text x="125" y="107" text-anchor="middle" class="text">Gemini Live API</text>
+
+  <!-- Memory -->
+  <rect x="260" y="40" width="210" height="90" class="box"/>
+  <text x="365" y="65" text-anchor="middle" class="title">Memoria</text>
+  <text x="365" y="87" text-anchor="middle" class="text">Vertex AI Memory Bank</text>
+  <text x="365" y="107" text-anchor="middle" class="text">--memory_service_uri</text>
+
+  <!-- Eval -->
+  <rect x="500" y="40" width="210" height="90" class="box"/>
+  <text x="605" y="65" text-anchor="middle" class="title">Evaluación</text>
+  <text x="605" y="87" text-anchor="middle" class="text">Trayectoria + Respuesta</text>
+  <text x="605" y="107" text-anchor="middle" class="text">adk eval / AgentEvaluator</text>
+
+  <!-- Deploy -->
+  <rect x="740" y="40" width="210" height="90" class="box"/>
+  <text x="845" y="65" text-anchor="middle" class="title">Despliegue</text>
+  <text x="845" y="87" text-anchor="middle" class="text">Agent Engine / Cloud Run / GKE</text>
+
+  <!-- Security -->
+  <rect x="140" y="180" width="300" height="120" class="box"/>
+  <text x="290" y="205" text-anchor="middle" class="title">Seguridad y Guardrails</text>
+  <text x="290" y="227" text-anchor="middle" class="text">AuthN/Z, Callbacks, Plugins</text>
+  <text x="290" y="247" text-anchor="middle" class="text">Model Armor, PII Redaction</text>
+
+  <!-- Observability -->
+  <rect x="520" y="180" width="300" height="120" class="box"/>
+  <text x="670" y="205" text-anchor="middle" class="title">Observabilidad</text>
+  <text x="670" y="227" text-anchor="middle" class="text">Logging, OpenTelemetry</text>
+  <text x="670" y="247" text-anchor="middle" class="text">Cloud Trace, Integraciones</text>
+
+  <!-- Arrows -->
+  <line x1="230" y1="85" x2="260" y2="85" class="arrow"/>
+  <line x1="470" y1="85" x2="500" y2="85" class="arrow"/>
+  <line x1="710" y1="85" x2="740" y2="85" class="arrow"/>
+  <line x1="260" y1="130" x2="260" y2="180" class="arrow"/>
+  <line x1="710" y1="130" x2="710" y2="180" class="arrow"/>
+</svg>
+
