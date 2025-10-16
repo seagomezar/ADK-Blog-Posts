@@ -1,5 +1,7 @@
 # 🤖 Lección 1: Construye tu primer agente con Google ADK
 
+Resumen: Crea tu primer agente ADK con búsqueda web, configura el entorno (.env), prueba en la Web UI y sienta bases para futuras extensiones.
+
 Bienvenida/o a la aventura de crear tu primer agente de noticias de IA con el Agent Developer Kit (ADK) de Google. En esta lección sentamos las bases de un agente capaz de conversar, conectarse al mundo real y entregar información fresca. Aquí tienes un recorrido claro del cuaderno `Lesson_1.ipynb`, con consejos prácticos para avanzar con confianza. 🙌
 
 ## Panorama general
@@ -52,7 +54,7 @@ Para conversar con el agente, tienes dos opciones:
 
 Abre la URL (http://localhost:8000). En Windows, si ves `_make_subprocess_transport NotImplementedError`, usa `adk web --no-reload`. Detén con `Ctrl-C`.
 
-La Web UI muestra el trace (paso a paso) y permite interacción por voz en tiempo real. Para voz, usa modelos con Gemini Live API (por ejemplo, `gemini-2.0-flash-live-001`). 🎙️
+La Web UI muestra el trace (paso a paso) y permite interacción por voz en tiempo real. Para voz, usa modelos con Gemini Live API (por ejemplo, `gemini-2.0-flash-live-001`).
 
 ## 1.5 Añadiendo la herramienta de búsqueda 🔍
 El modelo por sí solo no conoce noticias recientes. Agrega `google_search`:
@@ -89,7 +91,7 @@ tools:
   - name: google_search
 ```
 
-📌 Sugerencia: Documenta decisiones en comentarios. ADK valida el esquema y avisará si falta algún campo clave.
+📌 Sugerencia: Documenta decisiones en comentarios. ADK valida el esquema y avisará si falta algún campo clave. Más detalles: https://google.github.io/adk-docs/agents/config/
 
 ## 1.8 Afinando instrucciones avanzadas 🛡️
 Para un comportamiento consistente, agrega reglas claras:
@@ -101,8 +103,7 @@ Para un comportamiento consistente, agrega reglas claras:
 
 Este patrón reduce al mínimo alucinaciones y mantiene el propósito. ✅
 
-## 🎙️ Complemento del video
-La introducción enfatiza crear rápido un agente funcional, probarlo en la Web UI y entender que los modelos pueden variar su salida entre ejecuciones. Usa el trace para observar decisiones del agente y refina instrucciones iterativamente.
+
 
 ## Buenas prácticas y próximos pasos 🚦
 - Cierra procesos viejos con `pkill -f "adk web"` para liberar recursos.
@@ -111,8 +112,11 @@ La introducción enfatiza crear rápido un agente funcional, probarlo en la Web 
 - Define convenciones de nombres, carpetas y versionado desde ya.
 
 ## Recursos
-- Modelos de la API de Gemini: https://ai.google.dev/gemini-api/docs/models#model-variations
-- Google ADK (visión general): https://ai.google.dev/gemini-api/docs/agent-overview
+- ADK Quickstart: https://google.github.io/adk-docs/get-started/quickstart/
+- ADK Python: https://google.github.io/adk-docs/get-started/python/
+- Built‑in Tools (Google Search): https://google.github.io/adk-docs/tools/built-in-tools/
 
 —
-¿Lista/o para la siguiente lección? Esta base te permitirá escalar hacia un verdadero podcast inteligente sobre noticias de IA. 🎧✨
+Siguiente lección ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-clase-2-potencia-tu-agente-con-herramientas-personalizadas
+
+Descargo de responsabilidad: Este contenido se basa en el curso “Building Live Voice Agents with Google’s ADK!” de DeepLearning.AI (https://learn.deeplearning.ai/courses/building-live-voice-agents-with-googles-adk/lesson/dewdno61/introduction). Este blog busca acercar material de ADK al español.

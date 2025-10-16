@@ -1,5 +1,7 @@
 # 🧠 Lección 3: Construye un agente investigador en segundo plano
 
+Resumen: Adopta el patrón Coordinator–Dispatcher para investigar en silencio, enriquecer con finanzas y persistir un reporte Markdown sin ruido en el chat.
+
 En esta tercera lección transformamos al asistente conversacional en un coordinador silencioso que investiga, compone un reporte y solo te habla dos veces. Reutilizamos herramientas de la lección anterior y agregamos persistencia de archivo para obtener un artefacto claro: un reporte Markdown. 🚀
 
 ## Panorama general
@@ -84,12 +86,7 @@ with open("ai_research_report.md", encoding="utf-8") as f:
     display(Markdown(f.read()))
 ```
 
-## 🎙️ Complemento del video
-El video describe el salto de un agente conversacional a un investigador autónomo:
-- Añadimos `save_news_to_markdown` para persistir el resultado final.
-- Reescribimos instrucciones del root agent para coordinar, no conversar.
-- Simplificamos la interacción humana a “orden → espera → confirmación”.
-- Las plantillas guían al LLM con precisión sin necesidad de esquemas formales (todavía).
+
 
 ## Buenas prácticas y próximos pasos ✅
 - Versiona `ai_research_report.md` solo si necesitas auditar resultados; si no, ignóralo.
@@ -98,4 +95,8 @@ El video describe el salto de un agente conversacional a un investigador autóno
 - Practica el mismo patrón con otras temáticas para afinar prompts y plantillas.
 
 —
-Con este patrón ya tienes un agente que coordina investigaciones, trabaja en silencio y entrega resultados formateados. El siguiente paso: estandarizar aún más la salida y añadir control programático con callbacks. 💼✨
+Anterior lección ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-clase-2-potencia-tu-agente-con-herramientas-personalizadas
+
+Siguiente lección ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-clase-4-callbacks-y-guardrails-para-agentes-confiables
+
+Descargo de responsabilidad: Este contenido se basa en el curso “Building Live Voice Agents with Google’s ADK!” de DeepLearning.AI (https://learn.deeplearning.ai/courses/building-live-voice-agents-with-googles-adk/lesson/dewdno61/introduction). Este blog busca acercar material de ADK al español.

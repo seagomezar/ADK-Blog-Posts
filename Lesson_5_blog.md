@@ -1,5 +1,7 @@
 # 🧱 Lección 5: Respuestas estructuradas con esquemas y validación
 
+Resumen: Establece contratos de salida con Pydantic y/o `output_schema`; valida JSON, genera Markdown y coordina con callbacks para trazabilidad.
+
 En esta quinta lección llevamos tu agente a un nivel “enterprise”: estandarizamos la salida con esquemas, validamos datos y mantenemos la trazabilidad que iniciamos con los callbacks de la Lección 4. El objetivo es lograr respuestas predecibles, fáciles de consumir por otras apps y listas para producción. 🔒✨
 
 ## Panorama general
@@ -150,13 +152,16 @@ save_news_to_markdown(md_path, report_to_markdown(report))
 - Campos faltantes: asignar por defecto `N/A` o reintentar con un prompt que pida solo los campos faltantes.
 - Fuentes vacías: exigir al modelo que incluya al menos una URL por ítem o marcar el ítem como incompleto.
 
-## 🎙️ Complemento del video
-Esta lección se apoya en la Lección 4 (callbacks y trazabilidad) y la lleva un paso más allá: ahora el output tiene un contrato formal. Así, el pipeline pasa de “texto libre + guardrails” a “JSON validado + guardrails”, más apto para APIs, dashboards y automatizaciones.
+
 
 ## Recursos
-- ADK (visión general): https://ai.google.dev/gemini-api/docs/agent-overview
+- Output schema (LlmAgent): https://google.github.io/adk-docs/api-reference/python/google-adk.html#google.adk.agents.LlmAgent.output_schema
+- Evaluación: https://google.github.io/adk-docs/evaluate/
 - Pydantic: https://docs.pydantic.dev/
-- Buenas prácticas de prompts estructurados: usa ejemplos y “solo JSON”.
 
 —
-Con salidas estructuradas, validación y callbacks, tu agente queda listo para integrarse en productos reales. ¿Avanzamos a multi‑agentes y pipelines orquestados en la siguiente lección? 🚀
+Anterior lección ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-clase-4-callbacks-y-guardrails-para-agentes-confiables
+
+Siguiente lección ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-clase-6-de-desarrollo-a-produccion-streaming-memoria-evaluacion-despliegue-y-observabilidad
+
+Descargo de responsabilidad: Este contenido se basa en el curso “Building Live Voice Agents with Google’s ADK!” de DeepLearning.AI (https://learn.deeplearning.ai/courses/building-live-voice-agents-with-googles-adk/lesson/dewdno61/introduction). Este blog busca acercar material de ADK al español.

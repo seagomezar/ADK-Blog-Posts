@@ -1,5 +1,7 @@
 # 🧩 Lección 4: Callbacks y guardrails para agentes confiables
 
+Resumen: Implementa filtros y trazabilidad con callbacks (`before_tool` y `after_tool`) en `LlmAgent`, y conoce cuándo usar Plugins para políticas globales.
+
 Los agentes son potentes… y no deterministas. En esta lección añadimos control programático para que tu agente se comporte de forma predecible: afinamos instrucciones y usamos callbacks como guardrails que filtran dominios, enriquecen respuestas y dejan trazabilidad. Al final tendrás un agente listo para producción que combina todo lo previo con controles efectivos. 💪
 
 ## Panorama general
@@ -143,17 +145,6 @@ with open('ai_research_report.md', 'r', encoding='utf-8') as f:
     display(Markdown(f.read()))
 ```
 
-## 🎙️ Complemento del video
-El video parte de una realidad: los LLM son no deterministas. Para producción, añadimos control en puntos deterministas del ciclo del agente:
-- Callbacks Before/After para Agent, Tool y Model.
-- `ToolContext` expone estado y metadatos de la invocación.
-- Un callback puede devolver `None` (continúa el flujo) o un objeto para sobreescribir el comportamiento.
-- Ejemplo práctico: filtramos dominios en `before_tool` y registramos fuentes en `after_tool` para transparencia y auditoría.
-
-🔒 Plugins vs. Callbacks por agente:
-- Para guardrails globales, considera **Plugins**. Sus callbacks se ejecutan antes que los de agente/herramienta.
-- Si un Plugin devuelve algo distinto de `None`, detiene la cadena y no se ejecutan callbacks de nivel inferior (precedencia documentada en adk-docs `docs/plugins/`).
-
 ## Buenas prácticas y próximos pasos ✅
 - Documenta tus políticas (qué dominios se bloquean y por qué) y prueba escenarios límite.
 - Incluye `process_log` en artefactos finales para trazabilidad.
@@ -162,11 +153,18 @@ El video parte de una realidad: los LLM son no deterministas. Para producción, 
 
 📌 Nota sobre Google Search:
 - `google_search` funciona con modelos Gemini 2.
-- Si el modelo devuelve "Search suggestions", muéstralas en tu UI (política de Grounding). Ver adk-docs: `docs/tools/built-in-tools.md`.
+- Si el modelo devuelve "Search suggestions", muéstralas en tu UI (política de Grounding). Más info: https://google.github.io/adk-docs/tools/built-in-tools/
 
 —
 Tu agente ahora combina investigación silenciosa con guardrails programáticos y trazabilidad. A partir de aquí, puedes escalar a multi-agentes y respuestas aún más estructuradas. 🔒✨
 
 ## Recursos
-- ADK (overview y herramientas): https://ai.google.dev/gemini-api/docs/agent-overview
-- Guía de Tools: https://google.github.io/adk-docs/tools/
+- Callbacks: https://google.github.io/adk-docs/callbacks/types-of-callbacks/
+- Plugins: https://google.github.io/adk-docs/plugins/
+- Built‑in Tools: https://google.github.io/adk-docs/tools/built-in-tools/
+
+Anterior lección ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-clase-3-construye-un-agente-investigador-en-segundo-plano
+
+Siguiente lección ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-clase-5-respuestas-estructuradas-con-esquemas-y-validacion
+
+Descargo de responsabilidad: Este contenido se basa en el curso “Building Live Voice Agents with Google’s ADK!” de DeepLearning.AI (https://learn.deeplearning.ai/courses/building-live-voice-agents-with-googles-adk/lesson/dewdno61/introduction). Este blog busca acercar material de ADK al español.

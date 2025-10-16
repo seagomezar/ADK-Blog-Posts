@@ -2,6 +2,8 @@
 
 Has completado el recorrido desde un agente básico hasta un sistema multi‑agente listo para producción, con voz en tiempo real, herramientas, callbacks/guardrails, salidas estructuradas, evaluación, despliegue y observabilidad. Aquí resumimos los aprendizajes, te dejamos recursos verificados en la doc local (adk-docs) y una guía de siguientes pasos.
 
+Resumen: Cierre del curso ADK con mapa de lecciones, recursos clave, comandos alineados a docs, troubleshooting y un reto final para producción.
+
 ## Panorama general
 - Diseñar agentes con propósito claro, instrucciones sólidas y herramientas adecuadas.
 - Orquestar flujos: conversacional, coordinador/dispatcher y pipelines en segundo plano.
@@ -104,3 +106,4 @@ adk web path/to/agents_dir --memory_service_uri="agentengine://<AGENT_ENGINE_ID>
 ## Cierre
 Este curso te deja una base sólida para construir agentes conversacionales, coordinadores e incluso pipelines en segundo plano, con controles de seguridad y observabilidad para producción. Conecta estos bloques con tus datos y procesos, itera con evaluaciones, y comparte lo que construyas. ¡Nos encantará ver tu próximo agente en acción!
 
+Descargo de responsabilidad: Este contenido se basa en el curso “Building Live Voice Agents with Google’s ADK!” de DeepLearning.AI (https://learn.deeplearning.ai/courses/building-live-voice-agents-with-googles-adk/lesson/dewdno61/introduction). Este blog busca acercar material de ADK al español.

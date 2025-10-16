@@ -1,5 +1,7 @@
 # 🚀 Lección 6: De desarrollo a producción — streaming, memoria, evaluación, despliegue, seguridad y observabilidad
 
+Resumen: Lleva tu agente a producción con streaming en vivo, memoria persistente, evaluación de calidad, despliegue gestionado, guardrails y observabilidad basada en OpenTelemetry.
+
 En esta lección cerramos el círculo: llevamos tu sistema (multi‑)agente del entorno local a producción. Nos apoyamos en el transcript y contrastamos cada pilar con la documentación local de ADK para darte un camino concreto y seguro.
 
 ## Panorama general
@@ -169,16 +171,17 @@ Monitorea, depura y optimiza con logging y OpenTelemetry (docs: `observability/l
 - Observabilidad: `--log_level`, `--trace_to_cloud`, exportadores OTel, dashboards configurados.
 - Despliegue: Agent Engine (recomendado) o Cloud Run/GKE con seguridad de red.
 
-## 🎙️ Complemento del video
-El video resume los seis pilares para cerrar la brecha entre “funciona en mi máquina” y “listo para clientes reales”. ADK aporta los bloques necesarios: streaming en vivo, memoria persistente, evaluación, despliegue gestionado, seguridad/guardrails y observabilidad. Con esto, tus agentes pasan de demos a sistemas confiables y escalables.
-
 ## Recursos
-- Streaming: adk-docs/docs/get-started/streaming/quickstart-streaming.md
-- Memoria: adk-docs/docs/sessions/memory.md
-- Evaluación: adk-docs/docs/evaluate/index.md
-- Despliegue: adk-docs/docs/deploy/agent-engine.md, adk-docs/docs/deploy/cloud-run.md, adk-docs/docs/deploy/gke.md
-- Seguridad: adk-docs/docs/safety/index.md, adk-docs/docs/plugins/index.md
-- Observabilidad: adk-docs/docs/observability/logging.md, adk-docs/docs/observability/cloud-trace.md
+- Streaming Quickstart: https://google.github.io/adk-docs/get-started/streaming/quickstart-streaming/
+- Memoria: https://google.github.io/adk-docs/sessions/memory/
+- Evaluación: https://google.github.io/adk-docs/evaluate/
+- Despliegue: https://google.github.io/adk-docs/deploy/agent-engine/, https://google.github.io/adk-docs/deploy/cloud-run/, https://google.github.io/adk-docs/deploy/gke/
+- Seguridad: https://google.github.io/adk-docs/safety/
+- Observabilidad: https://google.github.io/adk-docs/observability/logging/, https://google.github.io/adk-docs/observability/cloud-trace/
 
 —
-Para cerrar procesos locales: `Ctrl‑C` en `adk web`. Si necesitas limpiar puertos, usa `pkill -f "adk web"`. ¡Listo para producción!
+Anterior lección ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-clase-5-respuestas-estructuradas-con-esquemas-y-validacion
+
+Siguiente: Conclusión ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-conclusion
+
+Descargo de responsabilidad: Este contenido se basa en el curso “Building Live Voice Agents with Google’s ADK!” de DeepLearning.AI (https://learn.deeplearning.ai/courses/building-live-voice-agents-with-googles-adk/lesson/dewdno61/introduction). Este blog busca acercar material de ADK al español.

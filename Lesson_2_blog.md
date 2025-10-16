@@ -1,5 +1,7 @@
 # 🛠️ Lección 2: Potencia tu agente con herramientas personalizadas
 
+Resumen: Añade un Function Tool (`get_financial_context`), combínalo con `google_search`, guía la conversación con instrucciones y prueba el flujo en la Web UI.
+
 En esta segunda entrega extendemos el agente con una herramienta propia y reforzamos el flujo conversacional para que las respuestas sean útiles y consistentes. Además, conectamos las ideas del video sobre Sesión, Estado y Memoria, que dan soporte a conversaciones persistentes. 🙌
 
 ## Panorama general
@@ -90,7 +92,7 @@ root_agent = Agent(
 
 📌 Nota sobre Google Search:
 - `google_search` funciona con modelos Gemini 2.
-- Si el modelo devuelve "Search suggestions", muéstralas en tu UI (política de Grounding). Ver adk-docs: `docs/tools/built-in-tools.md`.
+- Si el modelo devuelve "Search suggestions", muéstralas en tu UI (política de Grounding). Más info: https://google.github.io/adk-docs/tools/built-in-tools/
 
 ## 🎯 2.6 Desafíos propuestos
 - Nuevo tool: conecta otra API (sentimiento, datos macro, papers). Sigue tipado + docstring + manejo de errores.
@@ -103,12 +105,7 @@ root_agent = Agent(
 - Function Tools: https://google.github.io/adk-docs/tools/function-tools/
 - yfinance en PyPI: https://pypi.org/project/yfinance/
 
-## 🎙️ Complemento del video: Sesión, Estado y Memoria
-El video explica la base de conversaciones persistentes:
-- Session → contenedor de cada conversación (logs, eventos, metadatos). Usa `SessionService` en memoria o persistente.
-- State → “block de notas” compartido de corto plazo entre herramientas y subagentes.
-- Memory → persistencia de largo plazo curada por un LLM (ej.: preferencias). ADK ofrece memoria en memoria y conexión con Vertex AI Memory Bank.
-Estos conceptos permiten que `google_search` y `get_financial_context` colaboren sin perder contexto.
+
 
 ## Buenas prácticas y próximos pasos ✅
 - Documenta variantes (`app03`, etc.) con fecha, prompts y resultados.
@@ -117,4 +114,8 @@ Estos conceptos permiten que `google_search` y `get_financial_context` colaboren
 - Si evolucionas a podcast, evalúa memoria persistente para recordar preferencias.
 
 —
-Tu agente ahora combina noticias frescas con contexto financiero y un diálogo robusto. En la siguiente lección pasamos al patrón coordinador y salidas estructuradas. 🚀
+Anterior lección ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-clase-1-construye-tu-primer-agente-con-google-adk
+
+Siguiente lección ➜ https://www.sebastian-gomez.com/category/inteligencia-artificial/adk-clase-3-construye-un-agente-investigador-en-segundo-plano
+
+Descargo de responsabilidad: Este contenido se basa en el curso “Building Live Voice Agents with Google’s ADK!” de DeepLearning.AI (https://learn.deeplearning.ai/courses/building-live-voice-agents-with-googles-adk/lesson/dewdno61/introduction). Este blog busca acercar material de ADK al español.
